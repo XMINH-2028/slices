@@ -1,0 +1,34 @@
+@keyframes example {
+    0%   {opacity: 0;}
+    50%  {opacity: 0.5;}
+    100% {}
+  }
+@keyframes example0 {
+    0%   {background-color: greenyellow;}
+    50%  {background-color: yellowgreen;}
+    100% {background-color: white;}
+  }
+#table1 {
+    background-color: greenyellow;
+}
+table {
+    position: relative;
+    overflow: hidden;
+}
+td {
+    padding: 0px;
+    overflow: hidden;
+}
+#topleft,#topright,#xchoice {
+    display: none;
+}
+#cover {
+    display: none;
+}
+#picture {
+    display: flex;
+}
+#picture img {
+    width: 200px;
+    height: 200px;
+}
