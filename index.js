@@ -397,8 +397,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
                 }
                 tdnumber[savefirst]=clr;
                 tdnumber[savesecond]=nbtd;
-                setTimeout(()=>{nbtd=0},3);
-                
+                nbtd=0;
             }
             for (i=1;i<=sizemain*sizemain;i++) {
                 if(parseFloat(document.getElementById("td"+i).style.left) == 0) {
