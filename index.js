@@ -128,7 +128,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
                 text += "<tr>";
                 for (j=1;j<=sizemain;j++){
                     nube += 1;
-                    text += "<td id='tdtd"+ nube +"'><img src='' alt='' id="+"'td"+ nube + "' onmousedown='set(this,"+ nube + ")' ontouchstart='set(this," + nube + ")'></td>";
+                    text += "<td id='tdtd"+ nube +"'><img src='' alt='' id="+"'td"+ nube + "' onmousedown='set(event,this,"+ nube + ")' ontouchstart='set(event,this," + nube + ")'></td>";
                 }
                 text += "</tr>";
             }
@@ -357,7 +357,8 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
         /*Onclick*/
         var savefirst=0;
         var savesecond=0;
-        function set(elmn,clr){
+        function set(e,elmn,clr){
+            e.preventDefault();
             var timercount=0;
             if (timer===0) {
                 start();
