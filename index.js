@@ -15,14 +15,27 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
         var text="";
         var nube=0;
         var hr,me,sd;
-        var seth,setw;
+        var setsize;
         var choicesize=0;
         var choiceimage=0;
         var adds="";
+        var idtable = document.getElementById('table');
         //Hàm cắt ảnh
-        function Cut() {
-            n=0;
-            k=0;
+        function getOffset(el) {
+            var _x = 0;
+            var _y = 0;
+            while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+                _x += el.offsetLeft - el.scrollLeft;
+                _y += el.offsetTop - el.scrollTop;
+                el = el.offsetParent;
+            }
+            return { top: _y, left: _x };
+        }
+        window.onresize=function(){
+            setSize();
+            cutResize();
+        }
+        function setLayout(){
             timer=0;
             nbtd=0;
             sd=0;
@@ -37,9 +50,12 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             document.getElementById("top").style.display="none";
             document.getElementById("picture").style.display="none";
             document.getElementById("topleft").style.display="flex";
-            document.getElementById("xchoice").style.display="block";
             document.getElementById("topright").style.display="flex";
            
+        }
+         function setSize() {
+            n=0;
+            k=0;
             nube=0;
             text="";
             for (i=1;i<=sizemain;i++){
@@ -52,47 +68,36 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             }
             document.getElementById("table").innerHTML=text;
             /*Thiết lập đơn vị theo kích thước màn hình*/
-            setw=Math.round(screen.width*0.35);
-            seth=Math.round(screen.height*0.35);
-            if (setw%sizemain==0) {
-                setw = setw;
+            if (window.innerHeight<window.innerWidth) {
+                setsize = Math.floor(window.innerHeight - getOffset(idtable).top-5);
+            } else {
+                setsize = Math.floor(window.innerWidth-10);
+            }
+            if (setsize%sizemain==0) {
+                setsize = setsize;
             } else {
                 for (i=1;i<=(sizemain-1);i++){
-                    setw=setw-1;
-                    if (setw%sizemain==0){
+                    setsize=setsize-1;
+                    if (setsize%sizemain==0){
                         i=sizemain;
                     }
                 }
-            }
-            if (seth%sizemain==0) {
-                seth = seth;
-            } else {
-                for (i=1;i<=(sizemain-1);i++){
-                    seth=seth-1;
-                    if (seth%sizemain==0){
-                        i=sizemain;
-                    }
-                }
-            }
-            if (setw >= seth) {
-                seth = setw;
-            } else {
-                setw=seth;
             }
             for (i=1;i<=sizemain*sizemain;i++){
                 document.getElementById("td"+i).style.position="absolute";
                 document.getElementById("tdtd"+i).style.animationName="example";
             }
           
-            document.getElementById("table").style.width=setw +"px";
-            document.getElementById("table").style.height=seth +"px";
+            document.getElementById("table").style.width=setsize +"px";
+            document.getElementById("table").style.height=setsize +"px";
             for (i=1;i<=sizemain*sizemain;i++){
-                document.getElementById("td"+i).style.height=seth+"px";
-                document.getElementById("td"+i).style.width=setw+"px";
+                document.getElementById("td"+i).style.height=setsize+"px";
+                document.getElementById("td"+i).style.width=setsize+"px";
             }
+
             /*Vị trí top của khung chứa ảnh căt-dùng cho random*/
             for (i = 1; i <= sizemain*sizemain; i++){
-                topimg[i]=n*seth/sizemain;
+                topimg[i]=n*setsize/sizemain;
                 k++;
                 if (k%sizemain == 0){
                     n++;
@@ -101,7 +106,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             /*Vị trí left của khung chứa ảnh căt-dùng cho random*/
             n=0;
             for (i = 1; i <= sizemain*sizemain; i++){
-                leftimg[i]=n*setw/sizemain;
+                leftimg[i]=n*setsize/sizemain;
                 n++;
                 if (n%sizemain == 0){
                     n = 0;
@@ -111,7 +116,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             n=0;
             k=0;
             for (i = 1; i <= sizemain*sizemain; i++){
-                topclip[i]=n*seth/sizemain;
+                topclip[i]=n*setsize/sizemain;
                 k++;
                 if (k%sizemain == 0){
                     n++;
@@ -120,12 +125,68 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             /*Vị trí left của khung ảnh cắt-dùng cho random*/
             n=0;
             for (i = 1; i <= sizemain*sizemain; i++){
-                leftclip[i]=n*setw/sizemain;
+                leftclip[i]=n*setsize/sizemain;
                 n++;
                 if (n%sizemain == 0){
                     n = 0;
                 }
             }
+        }
+        function cutResize(){
+            /*Vị trí của khung ảnh khi thực hiện cắt*/ 
+            for (i = 1; i <= sizemain*sizemain; i++){
+                topimgclip[i] = topimg[tdnumber[i]] - topclip[imgnumber[i]];
+                leftimgclip[i] = leftimg[tdnumber[i]] - leftclip[imgnumber[i]];
+            }
+            /*Lấy các thông số khi thực hiện cắt cho các ô ảnh từ 1 đến 25*/ 
+            n=0;
+            t=0;
+            r=setsize/sizemain;
+            b=setsize/sizemain;
+            l=0;
+            for (i = 1; i <= sizemain*sizemain; i++){
+                cliptop[i]=t;
+                clipright[i]=r;
+                clipbottom[i]=b;
+                clipleft[i]=l;
+                r=r + setsize/sizemain;
+                l=l + setsize/sizemain;
+                if (r == setsize*(sizemain+1)/sizemain){
+                    t = t + setsize/sizemain;
+                    b = b + setsize/sizemain;
+                    r = setsize/sizemain;
+                    l = 0;
+                }
+            }
+            /*Thực hiện cắt ảnh*/ 
+            t=0;
+            r=0;
+            b=0;
+            l=0;
+            k=1;
+            for (i = 1; i <= sizemain*sizemain;){
+                for (j = 1; j <= sizemain*sizemain; j++){
+                    if(tdnumber[j] == i){
+                        x=document.getElementById("td" + tdnumber[j]);
+                        x.src=adds;
+                        x.style.animationDuration= k+"s";
+                        k=k+0.2;
+                        x.style.top = topimgclip[j] + "px";
+                        x.style.left= leftimgclip[j] + "px";
+                        t = cliptop[imgnumber[j]];
+                        r = clipright[imgnumber[j]];
+                        b = clipbottom[imgnumber[j]];
+                        l = clipleft[imgnumber[j]];
+                        x.style.clip= "rect("+ t + "px,"+ r + "px,"+ b + "px,"+ l + "px)";
+                        i++;
+                    }
+                }
+            }
+        }
+        function Cut() {
+            setLayout();
+            setSize();
+            
             /*Random vị trí khung chứa ảnh cắt*/ 
             for (i = 1; i <= sizemain*sizemain;)
             {
@@ -154,55 +215,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
                     i = i + 1;
                 }
             }
-            /*Vị trí của khung ảnh khi thực hiện cắt*/ 
-            for (i = 1; i <= sizemain*sizemain; i++){
-                topimgclip[i] = topimg[tdnumber[i]] - topclip[imgnumber[i]];
-                leftimgclip[i] = leftimg[tdnumber[i]] - leftclip[imgnumber[i]];
-            }
-            /*Lấy các thông số khi thực hiện cắt cho các ô ảnh từ 1 đến 25*/ 
-            n=0;
-            t=0;
-            r=setw/sizemain;
-            b=seth/sizemain;
-            l=0;
-            for (i = 1; i <= sizemain*sizemain; i++){
-                cliptop[i]=t;
-                clipright[i]=r;
-                clipbottom[i]=b;
-                clipleft[i]=l;
-                r=r + setw/sizemain;
-                l=l + setw/sizemain;
-                if (r == setw*(sizemain+1)/sizemain){
-                    t = t + seth/sizemain;
-                    b = b + seth/sizemain;
-                    r = setw/sizemain;
-                    l = 0;
-                }
-            }
-            /*Thực hiện cắt ảnh*/ 
-            t=0;
-            r=0;
-            b=0;
-            l=0;
-            k=1;
-            for (i = 1; i <= sizemain*sizemain;){
-                for (j = 1; j <= sizemain*sizemain; j++){
-                    if(tdnumber[j] == i){
-                        x=document.getElementById("td" + tdnumber[j]);
-                        x.src=adds;
-                        x.style.animationDuration= k+"s";
-                        k=k+0.2;
-                        x.style.top = topimgclip[j] + "px";
-                        x.style.left= leftimgclip[j] + "px";
-                        t = cliptop[imgnumber[j]];
-                        r = clipright[imgnumber[j]];
-                        b = clipbottom[imgnumber[j]];
-                        l = clipleft[imgnumber[j]];
-                        x.style.clip= "rect("+ t + "px,"+ r + "px,"+ b + "px,"+ l + "px)";
-                        i++;
-                    }
-                }
-            }
+            cutResize();
             /*Set animationDuration cho khung kết quả + tạo 2 mảng thể hiện sự nhập xuất của ảnh ở 
             phần ảnh random và ảnh kết quả + khai báo biến chứa ảnh đã bị ẩn ở phần kết quả khi thực
             hiện trả về hoặc đổi ảnh*/ 
