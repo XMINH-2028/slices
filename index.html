@@ -11,34 +11,21 @@
 <body>
         <div class="container-fluid" id="main">
             <h1 class="h1 text-center text-primary " id="xchoice">X-SLIDE</h1>
-            <h2 class="h2 text-center " id="selectsize">SELECT SIZE</h2>
-            <div class="row " id="top">
+            <h3 class="h3 text-center " id="selectsize">SELECT SIZE</h3>
+            <div class="row mx-0" id="top">
                 <button class="btn btn-primary btn-md col-3 mx-auto rounded-0 " id="size" onclick="choosesize(this,3)">Size 3*3</button>
                 <button class="btn btn-success btn-md col-3 mx-auto rounded-0" id="size" onclick="choosesize(this,4)">Size 4*4</button>
                 <button class="btn btn-warning btn-md col-3 mx-auto rounded-0" id="size" onclick="choosesize(this,5)">Size 5*5</button>
                 <button class="btn btn-danger btn-md col-3 mx-auto rounded-0" id="size" onclick="choosesize(this,6)">Size 6*6</button>
             </div>
-            <h2 class="h2 text-center text-primary " id="selectimage">SELECT IMAGE</h2>
-            <div id="picture" class="flex-wrap justify-content-center align-content-end">          
-                <div>
-                    <img src="images/cat.jpg" alt="" onclick="picture(this,'images/cat.jpg')" id="img1">
+            <h3 class="h3 text-center text-primary " id="selectimage">SELECT IMAGE</h3>
+            <div id="picture" class="flex-column">          
+                <div class="mx-auto">
+                    <img src="" alt="" onclick="picture(this)" id="img1">
                 </div>
             </div>
-            <div class="row" id="nexttop">
-                <p class="text-center col-sm-6 justify-content-center align-items-center mb-1" id="topleft">
-                    <button class="btn-lg btn-success mr-2 py-1"><a href="index.html" class="text-light">BACK</a></button>
-                    <button class="btn-lg btn-warning ml-2 py-1"><a href="#" class="text-dark" onclick="Cut()">RESET</a></button>
-                </p>
-                <p class="text-center col-sm-6 justify-content-center align-items-center mb-1" id="topright">
-                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-alarm text-primary" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M8 15A6 6 0 1 0 8 3a6 6 0 0 0 0 12zm0 1A7 7 0 1 0 8 2a7 7 0 0 0 0 14z"/>
-                        <path fill-rule="evenodd" d="M8 4.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.053.224l-1.5 3a.5.5 0 1 1-.894-.448L7.5 8.882V5a.5.5 0 0 1 .5-.5z"/>
-                        <path d="M.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.035 8.035 0 0 0-3.527-3.527z"/>
-                        <path fill-rule="evenodd" d="M11.646 14.146a.5.5 0 0 1 .708 0l1 1a.5.5 0 0 1-.708.708l-1-1a.5.5 0 0 1 0-.708zm-7.292 0a.5.5 0 0 0-.708 0l-1 1a.5.5 0 0 0 .708.708l1-1a.5.5 0 0 0 0-.708zM5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
-                        <path d="M7 1h2v2H7V1z"/>
-                      </svg>
-                    <span id="hour" class="text-danger">00</span>:<span id="minute" class="text-warning">00</span>:<span id="second" class="text-success">00</span>
-                </p>
+            <div id="nexttop" class='justify-content-center align-items-center'>
+                
             </div>    
             <div class="position-relative">
                 <table cellspacing="0px" class="mx-auto" id="table">

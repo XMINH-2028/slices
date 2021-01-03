@@ -19,7 +19,52 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
         var choicesize=0;
         var choiceimage=0;
         var adds="";
+        var layout = 0;
         var idtable = document.getElementById('table');
+        var idpic=document.getElementById('picture');
+        var addpic = document.querySelector('#picture img');
+        var srcpic=['images/butterfly.jpg','images/cat.jpg','images/dolphin.jpg','images/dragonfly.jpg','images/elephant.jpg',
+        'images/koala.jpg','images/Lighthouse.jpg','images/lotus.jpg','images/monkey.jpg','images/rose.jpg','images/sunflower.jpg','images/winter.jpg'];    
+        var srcrandom="";
+        function creatNext(){
+            var node = document.createElement("button");
+            node.innerHTML="NEXT";
+            node.setAttribute('class','btn-lg btn-success text-light');
+            node.setAttribute('onclick','Next()');
+            node.setAttribute('id','next');
+            document.getElementById('topleft').appendChild(node);
+        }
+        function setPic() {
+            if (srcrandom==="") {
+                srcrandom=Math.floor(Math.random()*12);
+                document.getElementById('img1').setAttribute('src',srcpic[srcrandom]);
+            }
+            if (window.innerHeight<window.innerWidth) {
+                addpic.style.width = Math.floor(window.innerHeight - getOffset(idpic).top-20)+'px';
+                addpic.style.height = Math.floor(window.innerHeight - getOffset(idpic).top-20)+'px';
+            } else {
+                if (Math.floor(window.innerHeight - getOffset(idpic).top-20)<Math.floor(window.innerWidth-30)){
+                    addpic.style.width = Math.floor(window.innerHeight - getOffset(idpic).top-20)+'px';
+                    addpic.style.height = Math.floor(window.innerHeight - getOffset(idpic).top-20)+'px';
+                } else {
+                    addpic.style.width = Math.floor(window.innerWidth-30)+'px';
+                    addpic.style.height = Math.floor(window.innerWidth-30)+'px';
+                }   
+            }
+        }
+        setPic();
+       
+        //Next
+        function Next() {
+            if(srcrandom<11) {
+                srcrandom+=1;
+            } else {
+                srcrandom=0;
+            }
+            adds=srcpic[srcrandom];
+            Cut();
+            document.getElementById('xchoice').innerHTML='X-SLICE';
+        }
         //Hàm cắt ảnh
         function getOffset(el) {
             var _x = 0;
@@ -32,16 +77,35 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             return { top: _y, left: _x };
         }
         window.onresize=function(){
-            setSize();
-            cutResize();
+            if (layout===1) {
+                setSize();
+                cutResize();
+            } else {
+                setPic();
+            }
         }
         function setLayout(){
+            layout=1;
             clearInterval(visible);
             timer=0;
             nbtd=0;
             sd=0;
             me=0;
             hr=0; 
+            document.getElementById("nexttop").innerHTML=`<div class="d-flex justify-content-center align-items-center mb-1" id="topleft">
+                        <button class="btn-lg btn-danger"><a href="index.html" class="text-light">HOME</a></button>
+                        <button class="btn-lg btn-warning mx-2 text-light" onclick="Cut()">RESET</button>
+                    </div>
+                    <div class="time d-flex justify-content-center align-items-center mb-1 mx-2">
+                        <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-alarm text-primary" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A6 6 0 1 0 8 3a6 6 0 0 0 0 12zm0 1A7 7 0 1 0 8 2a7 7 0 0 0 0 14z"/>
+                            <path fill-rule="evenodd" d="M8 4.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.053.224l-1.5 3a.5.5 0 1 1-.894-.448L7.5 8.882V5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.035 8.035 0 0 0-3.527-3.527z"/>
+                            <path fill-rule="evenodd" d="M11.646 14.146a.5.5 0 0 1 .708 0l1 1a.5.5 0 0 1-.708.708l-1-1a.5.5 0 0 1 0-.708zm-7.292 0a.5.5 0 0 0-.708 0l-1 1a.5.5 0 0 0 .708.708l1-1a.5.5 0 0 0 0-.708zM5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                            <path d="M7 1h2v2H7V1z"/>
+                          </svg>
+                        <span id="hour" class="text-danger">00</span>:<span id="minute" class="text-warning">00</span>:<span id="second" class="text-success">00</span>
+                    </div>`;
             document.getElementById("hour").innerHTML="00";
             document.getElementById("minute").innerHTML="00";
             document.getElementById("second").innerHTML="00";
@@ -50,8 +114,9 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             document.getElementById("selectimage").style.display="none";
             document.getElementById("top").style.display="none";
             document.getElementById("picture").style.display="none";
-            document.getElementById("topleft").style.display="flex";
-            document.getElementById("topright").style.display="flex";
+            document.getElementById("nexttop").style.display="flex";
+            
+            
            
         }
          function setSize() {
@@ -70,9 +135,13 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             document.getElementById("table").innerHTML=text;
             /*Thiết lập đơn vị theo kích thước màn hình*/
             if (window.innerHeight<window.innerWidth) {
-                setsize = Math.floor(window.innerHeight - getOffset(idtable).top-5);
+                setsize = Math.floor(window.innerHeight - getOffset(idtable).top-20);
             } else {
-                setsize = Math.floor(window.innerWidth-10);
+                if(Math.floor(window.innerHeight - getOffset(idtable).top-20)<Math.floor(window.innerWidth-10)) {
+                    setsize = Math.floor(window.innerHeight - getOffset(idtable).top-20);
+                } else {
+                    setsize = Math.floor(window.innerWidth-10);
+                }  
             }
             if (setsize%sizemain==0) {
                 setsize = setsize;
@@ -238,11 +307,8 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             }
         }
         //Hàm chọn ảnh
-        function picture(elmn,clr) {
-            adds = clr;
-            for (i=1; i<=1; i++){
-                document.getElementById("img"+i).style.borderRadius="0px";
-            }
+        function picture(elmn) {
+            adds = elmn.getAttribute('src');
             elmn.style.borderRadius="50px";
             if (choiceimage == 0) {
                 choiceimage += 1;
@@ -344,6 +410,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             if (timercount == (sizemain*sizemain)) {
                 document.getElementById("xchoice").innerHTML="CONGRATULATION!";
                 document.getElementById("cover").style.display="block";
+                creatNext();
                 clearInterval(visible);
             }
         }

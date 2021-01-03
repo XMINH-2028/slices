@@ -17,8 +17,19 @@ td {
     padding: 0 5px !important;
     overflow: hidden;
 }
-#topleft,#topright {
+#nexttop {
     display: none;
+}
+#nexttop .btn-lg {
+    padding: 5px 15px;
+}
+#nexttop .btn-danger {
+    padding: 0 !important;
+}
+#nexttop .btn-danger a {
+    display: block;
+    padding: 5px 15px;
+    text-decoration: none;
 }
 #cover {
     position: absolute;
@@ -31,10 +42,7 @@ td {
 #picture {
     display: flex;
 }
-#picture img {
-    width: 200px;
-    height: 200px;
-}
+
 #xchoice,#selectimage,#selectsize,#top,#nexttop {
         margin-top: 0.25rem !important;
 }
@@ -51,11 +59,7 @@ td {
         margin-bottom: 1rem !important;
     }
 }
-@media screen and (max-width: 360px) {
-    #selectimage,#selectsize {
-        font-size: 1.8rem !important;
-    }
-}
+
 @media screen and (max-height: 480px) {
     #selectimage,#selectsize {
         font-size: 1.2rem !important;
@@ -63,10 +67,50 @@ td {
     #xchoice {
         font-size: 1.8rem !important;
     }
+    #nexttop .btn-lg {
+    padding: 3px 10px;
+    }
+
+    #nexttop .btn-lg a {
+        display: block;
+        padding: 3px 10px;
+    }
+}
+@media screen and (max-width: 576px) {
+    #nexttop {
+        flex-wrap: wrap;
+    }
+    .time {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 480px) {
+    #selectimage,#selectsize {
+        font-size: 1.2rem !important;
+    }
 }
 @media screen and (max-width: 320px) {
     #top .btn {
         padding: 5px !important;
+    }
+     #nexttop .btn-lg {
+    padding: 3px 10px;
+    }
+
+    #nexttop .btn-lg a {
+        display: block;
+        padding: 3px 10px;
+    }
+    #xchoice {
+        font-size: 2rem !important;
+    }
+    #selectimage,#selectsize {
+        font-size: 1.2rem !important;
+    }
+}
+@media screen and (max-width: 280px) {
+    #top .btn {
+        padding: 2px !important;
     }
 }
 
