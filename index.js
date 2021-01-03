@@ -36,6 +36,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             cutResize();
         }
         function setLayout(){
+            clearInterval(visible);
             timer=0;
             nbtd=0;
             sd=0;
@@ -296,9 +297,12 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
                 start();
                 timer=1;
             }
-            if (nbtd===0 ||nbtd===clr) {
+            if (nbtd===0) {
                 nbtd = clr;/*Biến chứa vị trí ảnh xuất hiện ở phần kết quả*/
                 elmn.style.opacity = "0.4";
+            } else if(nbtd===clr) {
+                nbtd = 0;/*Biến chứa vị trí ảnh xuất hiện ở phần kết quả*/
+                elmn.style.opacity = "1";
             } else {
                 for (i = 1; i <= sizemain*sizemain; i++){
                     if (tdnumber[i]===nbtd) {
