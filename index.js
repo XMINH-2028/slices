@@ -128,7 +128,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
                 text += "<tr>";
                 for (j=1;j<=sizemain;j++){
                     nube += 1;
-                    text += "<td id='tdtd"+ nube +"'><img src='' alt='' id="+"'td"+ nube + "' onclick='set(this,"+ nube + ")' ondblclick='set(this," + nube + ")'></td>";
+                    text += "<td id='tdtd"+ nube +"'><img src='' alt='' id="+"'td"+ nube + "' ontouchstart='set(this,"+ nube + ")' ondblclick='set(this," + nube + ")'></td>";
                 }
                 text += "</tr>";
             }
