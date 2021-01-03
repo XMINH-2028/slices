@@ -391,14 +391,14 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
                         b = clipbottom[imgnumber[i]];
                         l = clipleft[imgnumber[i]];
                         x.style.clip= "rect("+ t + "px,"+ r + "px,"+ b + "px,"+ l + "px)";
-                        x = document.getElementById("td" + nbtd);
                         x.style.opacity='1';
                         savesecond=i;
                     }
                 }
                 tdnumber[savefirst]=clr;
                 tdnumber[savesecond]=nbtd;
-                nbtd=0;
+                setTimeout(()=>{nbtd=0},3);
+                
             }
             for (i=1;i<=sizemain*sizemain;i++) {
                 if(parseFloat(document.getElementById("td"+i).style.left) == 0) {
