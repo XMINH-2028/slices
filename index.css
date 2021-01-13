@@ -1,3 +1,4 @@
+
 @keyframes example {
     0%   {opacity: 0;}
     50%  {opacity: 0.5;}
@@ -41,6 +42,28 @@ td {
 }
 #picture {
     display: flex;
+}
+#picture>div>div {
+    top:0;
+    left:0;
+}
+#img1 {
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+#img1 button {
+    background-color: rgba(255,255,255,0.5);
+    color: black;
+}
+#img1 button:hover {
+    background-color: rgba(255,255,255,1);
+}
+#img1 label {
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+}
+#img1 label:hover {
+    background-color: rgba(0,0,0,1);
 }
 
 #xchoice,#selectimage,#selectsize,#top,#nexttop {

@@ -22,9 +22,10 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
         var layout = 0;
         var idtable = document.getElementById('table');
         var idpic=document.getElementById('picture');
-        var addpic = document.querySelector('#picture img');
+        var addpic = document.getElementById('img1');
         var srcpic=['images/butterfly.jpg','images/cat.jpg','images/dolphin.jpg','images/dragonfly.jpg','images/elephant.jpg',
         'images/koala.jpg','images/Lighthouse.jpg','images/lotus.jpg','images/monkey.jpg','images/rose.jpg','images/sunflower.jpg','images/winter.jpg'];    
+        var btn=['rgba(0,123,255,0.5)','rgba(40,167,69,0.5)','rgba(255,193,7,0.5)','rgba(220,53,69,0.5)'];
         var srcrandom="";
         function creatNext(){
             var node = document.createElement("button");
@@ -37,7 +38,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
         function setPic() {
             if (srcrandom==="") {
                 srcrandom=Math.floor(Math.random()*12);
-                document.getElementById('img1').setAttribute('src',srcpic[srcrandom]);
+                addpic.style.backgroundImage=`url('${srcpic[srcrandom]}')`;
             }
             if (window.innerHeight<window.innerWidth) {
                 addpic.style.width = Math.floor(window.innerHeight - getOffset(idpic).top-20)+'px';
@@ -54,6 +55,22 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
         }
         setPic();
        
+        //Upload image
+        function Selectimg(event) {
+            addpic.style.backgroundImage=`url('${URL.createObjectURL(event.target.files[0])}')`;
+            adds=URL.createObjectURL(event.target.files[0]);
+            addpic.style.borderRadius="50px";
+            document.querySelector("#img1 button").innerHTML= 'Click me to select default image!';
+            document.querySelector("#img1 label").innerHTML= 'Selected your image!';
+            if (choiceimage == 0) {
+                choiceimage += 1;
+            }
+            if ((choiceimage+choicesize) == 2) {
+                Cut();
+            }
+        }
+
+
         //Next
         function Next() {
             if(srcrandom<11) {
@@ -297,8 +314,12 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             }
         }
         //Hàm chọn kích thước
-        function choosesize(elm0,clr0){
+        function choosesize(elmn,clr0,clr1){
             sizemain=clr0;
+            for (let i=0;i<document.querySelectorAll('.size').length;i++) {
+                document.querySelectorAll('.size')[i].style.outline = 'none';
+            }
+            elmn.style.outline = `5px solid ${btn[clr1]}`;
             if (choicesize == 0) {
             choicesize += 1;
             }
@@ -307,9 +328,13 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             }
         }
         //Hàm chọn ảnh
-        function picture(elmn) {
-            adds = elmn.getAttribute('src');
-            elmn.style.borderRadius="50px";
+        function picture() {
+            addpic.style.backgroundImage=`url('${srcpic[srcrandom]}')`;
+            addpic.style.borderRadius="50px";
+            adds = addpic.style.backgroundImage.slice(5,-2);
+            document.querySelector("#img1 button").innerHTML= 'Selected default image!';
+            document.querySelector("#img1 label").innerHTML= 'Click me to select your image!';
+            document.getElementById('sl_image').value = "";
             if (choiceimage == 0) {
                 choiceimage += 1;
             }
