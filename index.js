@@ -385,9 +385,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
         function countTouches(e) {
             countTouch = e.touches.length;
             if (countTouch===2) {
-                document.getElementById("bodymask").style.display='block';
-            } else {
-                document.getElementById("bodymask").style.display='none';
+               e.preventDefault();
             }
         }
 
