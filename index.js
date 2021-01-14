@@ -382,15 +382,16 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
 
 
         /*Ontouch*/
-        var countTouch=1;
+        var countTouch=0;
         function countTouches() {
             countTouch = event.touches.length;
+            console.log(countTouch);
         }
         /*Onclick*/
         var savefirst=0;
         var savesecond=0;
         function set(e,elmn,clr){
-            if (countTouch===1) {
+            if (countTouch===0) {
                 e.preventDefault();
                 var timercount=0;
                 if (timer===0) {
