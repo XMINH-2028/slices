@@ -379,6 +379,19 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
                         }
                     },1000)
             }
+
+        /*Counttouch*/
+        var countTouch=0;
+        function countTouches(e) {
+            countTouch = e.touches.length;
+            if (countTouch===2) {
+                document.getElementById("bodymask").style.display='block';
+            } else {
+                document.getElementById("bodymask").style.display='none';
+            }
+        }
+
+
         /*Onclick*/
         var savefirst=0;
         var savesecond=0;
@@ -393,7 +406,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
                 nbtd = clr;/*Biến chứa vị trí ảnh xuất hiện ở phần kết quả*/
                 elmn.style.opacity = "0.4";
             } else if(nbtd===clr) {
-                nbtd = 0;/*Biến chứa vị trí ảnh xuất hiện ở phần kết quả*/
+                nbtd = 0;
                 elmn.style.opacity = "1";
             } else {
                 for (i = 1; i <= sizemain*sizemain; i++){

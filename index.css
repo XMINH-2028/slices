@@ -18,6 +18,12 @@ td {
     padding: 0 5px !important;
     overflow: hidden;
 }
+#bodymask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
 #nexttop {
     display: none;
 }

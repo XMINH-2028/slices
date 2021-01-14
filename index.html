@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-        <div class="container-fluid" id="main">
+        <div class="container-fluid" id="main" ontouchstart="countTouches(event)" ontouchend="countTouches(event)">
             <h1 class="h1 text-center text-primary " id="xchoice">X-SLIDE</h1>
             <h3 class="h3 text-center " id="selectsize">SELECT SIZE</h3>
             <div class="row mx-0" id="top">
@@ -37,7 +37,7 @@
                 <div id="cover"></div>
             </div>    
         </div>
-         
+        <div id="bodymask" class="w-100 h-100"></div>
     <script src='index.js'></script>
 </body>
 </html>
