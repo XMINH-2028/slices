@@ -145,7 +145,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
                 text += "<tr>";
                 for (j=1;j<=sizemain;j++){
                     nube += 1;
-                    text += "<td id='tdtd"+ nube +"'><img src='' alt='' id="+"'td"+ nube + "' onmousedown='set(event,this,"+ nube + ")' onmouseup='setfn(event)' ontouchstart='set(event,this," + nube + ")' ontouchend='setfn(event)'></td>";
+                    text += "<td id='tdtd"+ nube +"'><img src='' alt='' id="+"'td"+ nube + "' onmousedown='set(event,this,"+ nube + ")' onmouseup='setfn(event,"+ nube + ")' ontouchstart='set(event,this," + nube + ")' ontouchend='setfn(event,"+ nube + ")'></td>";
                 }
                 text += "</tr>";
             }
@@ -385,7 +385,7 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
         var touchfn=0;
         function set(e,elmn,clr){
             if (touchfn===0) {
-                touchfn=1;
+                touchfn=clr;
                 e.preventDefault();
                 var timercount=0;
                 if (timer===0) {
@@ -444,7 +444,9 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             }
         }
 
-        function setfn(e){
-            touchfn=0;
-            e.preventDefault();
+        function setfn(e,clr){
+            if (touchfn===clr) {
+                touchfn=0;
+                e.preventDefault();
+            }
         }
