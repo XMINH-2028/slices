@@ -379,63 +379,72 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
                         }
                     },1000)
             }
+
+
+        /*Ontouch*/
+        var countTouch=1;
+        function countTouches() {
+            countTouch = event.touches.length;
+        }
         /*Onclick*/
         var savefirst=0;
         var savesecond=0;
         function set(e,elmn,clr){
-            e.preventDefault();
-            var timercount=0;
-            if (timer===0) {
-                start();
-                timer=1;
-            }
-            if (nbtd===0) {
-                nbtd = clr;/*Biến chứa vị trí ảnh xuất hiện ở phần kết quả*/
-                elmn.style.opacity = "0.4";
-            } else if(nbtd===clr) {
-                nbtd = 0;/*Biến chứa vị trí ảnh xuất hiện ở phần kết quả*/
-                elmn.style.opacity = "1";
-            } else {
-                for (i = 1; i <= sizemain*sizemain; i++){
-                    if (tdnumber[i]===nbtd) {
-                        x = document.getElementById("td" + clr);
-                        x.style.top = (topimg[clr] - topclip[imgnumber[i]]) + "px";
-                        x.style.left= (leftimg[clr] - leftclip[imgnumber[i]]) + "px";
-                        t = cliptop[imgnumber[i]];
-                        r = clipright[imgnumber[i]];
-                        b = clipbottom[imgnumber[i]];
-                        l = clipleft[imgnumber[i]];
-                        x.style.clip= "rect("+ t + "px,"+ r + "px,"+ b + "px,"+ l + "px)";
-                        savefirst=i;
+            if (countTouch===1) {
+                e.preventDefault();
+                var timercount=0;
+                if (timer===0) {
+                    start();
+                    timer=1;
+                }
+                if (nbtd===0) {
+                    nbtd = clr;/*Biến chứa vị trí ảnh xuất hiện ở phần kết quả*/
+                    elmn.style.opacity = "0.4";
+                } else if(nbtd===clr) {
+                    nbtd = 0;/*Biến chứa vị trí ảnh xuất hiện ở phần kết quả*/
+                    elmn.style.opacity = "1";
+                } else {
+                    for (i = 1; i <= sizemain*sizemain; i++){
+                        if (tdnumber[i]===nbtd) {
+                            x = document.getElementById("td" + clr);
+                            x.style.top = (topimg[clr] - topclip[imgnumber[i]]) + "px";
+                            x.style.left= (leftimg[clr] - leftclip[imgnumber[i]]) + "px";
+                            t = cliptop[imgnumber[i]];
+                            r = clipright[imgnumber[i]];
+                            b = clipbottom[imgnumber[i]];
+                            l = clipleft[imgnumber[i]];
+                            x.style.clip= "rect("+ t + "px,"+ r + "px,"+ b + "px,"+ l + "px)";
+                            savefirst=i;
+                        }
+                        if (tdnumber[i]===clr) {
+                            x = document.getElementById("td" + nbtd);
+                            x.style.top = (topimg[nbtd] - topclip[imgnumber[i]]) + "px";
+                            x.style.left= (leftimg[nbtd] - leftclip[imgnumber[i]]) + "px";
+                            t = cliptop[imgnumber[i]];
+                            r = clipright[imgnumber[i]];
+                            b = clipbottom[imgnumber[i]];
+                            l = clipleft[imgnumber[i]];
+                            x.style.clip= "rect("+ t + "px,"+ r + "px,"+ b + "px,"+ l + "px)";
+                            x.style.opacity='1';
+                            savesecond=i;
+                        }
                     }
-                    if (tdnumber[i]===clr) {
-                        x = document.getElementById("td" + nbtd);
-                        x.style.top = (topimg[nbtd] - topclip[imgnumber[i]]) + "px";
-                        x.style.left= (leftimg[nbtd] - leftclip[imgnumber[i]]) + "px";
-                        t = cliptop[imgnumber[i]];
-                        r = clipright[imgnumber[i]];
-                        b = clipbottom[imgnumber[i]];
-                        l = clipleft[imgnumber[i]];
-                        x.style.clip= "rect("+ t + "px,"+ r + "px,"+ b + "px,"+ l + "px)";
-                        x.style.opacity='1';
-                        savesecond=i;
+                    tdnumber[savefirst]=clr;
+                    tdnumber[savesecond]=nbtd;
+                    nbtd=0;
+                }
+                for (i=1;i<=sizemain*sizemain;i++) {
+                    if(parseFloat(document.getElementById("td"+i).style.left) == 0) {
+                        if (parseFloat(document.getElementById("td"+i).style.top) == 0) {
+                            timercount += 1;
+                        }
                     }
                 }
-                tdnumber[savefirst]=clr;
-                tdnumber[savesecond]=nbtd;
-                nbtd=0;
-            }
-            for (i=1;i<=sizemain*sizemain;i++) {
-                if(parseFloat(document.getElementById("td"+i).style.left) == 0) {
-                    if (parseFloat(document.getElementById("td"+i).style.top) == 0) {
-                        timercount += 1;
-                    }
+                if (timercount == (sizemain*sizemain)) {
+                    document.getElementById("xchoice").innerHTML="CONGRATULATION!";
+                    document.getElementById("cover").style.display="block";
+                    creatNext();
+                    clearInterval(visible);
                 }
-            }
-            if (timercount == (sizemain*sizemain)) {
-                document.getElementById("xchoice").innerHTML="CONGRATULATION!";
-                document.getElementById("cover").style.display="block";
-                creatNext();
-                clearInterval(visible);
             }
         }
