@@ -36,11 +36,32 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             document.getElementById('topleft').appendChild(node);
         }
         function setPic() {
-            if (srcrandom==="") {
-                srcrandom=Math.floor(Math.random()*12);
-                addpic.style.backgroundImage=`url('${srcpic[srcrandom]}')`;
-            }
-            if (window.innerHeight<window.innerWidth) {
+                
+                    if (window.innerHeight<window.innerWidth/1.5) {
+                        document.querySelector('#main>div').style.flexDirection = 'row';
+                        document.querySelector("#picture>div").style.height = '100%';
+                        document.querySelector("#picture>div").style.width = idpic.offsetWidth+'px';
+                        if (srcrandom==="") {
+                            srcrandom=Math.floor(Math.random()*12);
+                            addpic.setAttribute('src',srcpic[srcrandom]);
+                            addpic.addEventListener("load", function(){
+                                if(this.naturalWidth>this.naturalHeight) {
+                                    addpic.style.height = idpic.offsetWidth/(this.naturalWidth/this.naturalHeight)+'px';
+                                    addpic.style.width = '100%';
+                                } else {
+                                    addpic.style.height = '100%';
+                                    addpic.style.width = 'auto';
+                                }
+                            });
+                        }
+                    } else {
+                        
+                    }
+               
+                
+            
+            
+            /*if (window.innerHeight<window.innerWidth) {
                 addpic.style.width = Math.floor(window.innerHeight - getOffset(idpic).top-20)+'px';
                 addpic.style.height = Math.floor(window.innerHeight - getOffset(idpic).top-20)+'px';
             } else {
@@ -51,10 +72,9 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
                     addpic.style.width = Math.floor(window.innerWidth-30)+'px';
                     addpic.style.height = Math.floor(window.innerWidth-30)+'px';
                 }   
-            }
+            }*/
         }
-        setPic();
-       
+       setPic();
         //Upload image
         function Selectimg(event) {
             addpic.style.backgroundImage=`url('${URL.createObjectURL(event.target.files[0])}')`;
@@ -93,14 +113,14 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             }
             return { top: _y, left: _x };
         }
-        window.onresize=function(){
+       /* window.onresize=function(){
             if (layout===1) {
                 setSize();
                 cutResize();
             } else {
                 setPic();
             }
-        }
+        }*/
         function setLayout(){
             layout=1;
             clearInterval(visible);
@@ -127,8 +147,6 @@ var i,j,k,n,t,r,b,l,x,y,timer,nbtd;
             document.getElementById("minute").innerHTML="00";
             document.getElementById("second").innerHTML="00";
             document.getElementById("cover").style.display="none";
-            document.getElementById("selectsize").style.display="none";
-            document.getElementById("selectimage").style.display="none";
             document.getElementById("top").style.display="none";
             document.getElementById("picture").style.display="none";
             document.getElementById("nexttop").style.display="flex";

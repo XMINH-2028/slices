@@ -13,12 +13,16 @@ td {
     padding: 0px;
     overflow: hidden;
 }
+body {
 
+}
 #main {
     padding: 0 5px !important;
-    overflow: hidden;
+    height: 100vh;
+    min-width: 280px;
 }
-#nexttop {
+
+#nexttop,#tablewrap {
     display: none;
 }
 #nexttop .btn-lg {
@@ -40,44 +44,54 @@ td {
     left:0;
     background-color: transparent;
 }
+#xchoice {
+    flex-grow: 1;
+}
+#main>div {
+    flex-grow: 50;
+}
+#top {
+    flex-grow: 1;
+}
 #picture {
     display: flex;
+    flex-grow: 50;
 }
 #picture>div>div {
     top:0;
     left:0;
+    display: none;
 }
 #img1 {
-    background-size: 100% 100%;
-    overflow: hidden;
+    width: 0px;
 }
-#img1 button {
+#picture>div>div button {
     background-color: rgba(255,255,255,0.5);
     color: black;
 }
-#img1 button:hover {
+#picture>div>div button:hover {
     background-color: rgba(255,255,255,1);
 }
-#img1 label {
+#picture>div>div label {
     background-color: rgba(0,0,0,0.5);
     color: white;
 }
-#img1 label:hover {
+#picture>div>div label:hover {
     background-color: rgba(0,0,0,1);
 }
 
-#xchoice,#selectimage,#selectsize,#top,#nexttop {
+#selectimage,#selectsize,#nexttop {
         margin-top: 0.25rem !important;
 }
 
 @media screen and (min-width: 480px) and (min-height: 480px) {
-    #xchoice,#selectimage,#selectsize,#top,#nexttop {
+    #selectimage,#selectsize,#nexttop {
         margin-top: 0.5rem !important;
         margin-bottom: 0.5rem !important;
     }
 }
 @media screen and (min-height: 568px) {
-    #xchoice,#selectimage,#selectsize,#top,#nexttop {
+    #selectimage,#selectsize,#nexttop {
         margin-top: 1rem !important;
         margin-bottom: 1rem !important;
     }
