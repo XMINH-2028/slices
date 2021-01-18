@@ -9,33 +9,41 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body ontouchstart="countTouches(event)" ontouchend="countTouches(event)">
-        <div class="container-fluid" id="main">
-            <h1 class="h1 text-center text-primary " id="xchoice">X-SLIDE</h1>
-            <h3 class="h3 text-center " id="selectsize">SELECT SIZE</h3>
-            <div class="row mx-0" id="top">
-                <button class="btn btn-primary btn-md col-3 mx-auto rounded-0 size" onclick="choosesize(this,3,0)">Size 3*3</button>
-                <button class="btn btn-success btn-md col-3 mx-auto rounded-0 size" onclick="choosesize(this,4,1)">Size 4*4</button>
-                <button class="btn btn-warning btn-md col-3 mx-auto rounded-0 size" onclick="choosesize(this,5,2)">Size 5*5</button>
-                <button class="btn btn-danger btn-md col-3 mx-auto rounded-0 size" onclick="choosesize(this,6,3)">Size 6*6</button>
-            </div>
-            <h3 class="h3 text-center text-primary " id="selectimage">SELECT IMAGE</h3>
-            <div id="picture">          
-                <div class="d-flex flex-column justify-content-center mx-auto" id="img1">
-                    <button class="btn btn-md mb-2 mt-auto" onclick="picture()">Click me to select default image!</button>
-                    <form action="#">
-                        <label for="sl_image" class="btn btn-md w-100 mb-0">Click me to select your image!</label>
-                        <input type="file" name="sl_image" id="sl_image" class="d-none" onchange="Selectimg(event)">
-                    </form>
+        <div class="container-fluid d-flex flex-column" id="main">
+            <h1 class="h1 text-center text-primary pt-2 w-100 m-0" id="xchoice">X-SLIDE</h1>
+            <div class="py-2" id='content'>
+                <div id="top" class="d-flex flex-column py-2">
+                    <h3 class="h3 text-center m-0" id="selectsize">SELECT SIZE</h3>
+                    <div class="d-flex mx-0">
+                        <button class="btn btn-primary btn-md col-3 mx-auto rounded-0 size" onclick="choosesize(this,3,0)">Size 3*3</button>
+                        <button class="btn btn-success btn-md col-3 mx-auto rounded-0 size" onclick="choosesize(this,4,1)">Size 4*4</button>
+                        <button class="btn btn-warning btn-md col-3 mx-auto rounded-0 size" onclick="choosesize(this,5,2)">Size 5*5</button>
+                        <button class="btn btn-danger btn-md col-3 mx-auto rounded-0 size" onclick="choosesize(this,6,3)">Size 6*6</button>
+                    </div>
+                </div>
+                <div id="picture" class="py-2 d-flex flex-column justify-content-center"> 
+                    <h3 class="h3 text-center text-primary m-0" id="selectimage">SELECT IMAGE</h3>
+                    <div class="position-relative d-flex justify-content-center mx-auto w-100" id="imgrd">
+                        <img src="" alt="" id="img1">
+                        <div class="flex-column position-absolute w-100 align-items-center">
+                            <button class="btn btn-md mb-2" onclick="picture()">Click me to select default image!</button>
+                            <form action="#" >
+                                <label for="sl_image" class="btn btn-md mb-0">Click me to select your image!</label>
+                                <input type="file" name="sl_image" id="sl_image" class="d-none" onchange="Selectimg(event)">
+                            </form>
+                        </div>
+                    </div>             
                 </div>
             </div>
-            <div id="nexttop" class='justify-content-center align-items-center'>
-                
-            </div>    
-            <div class="position-relative">
-                <table cellspacing="0px" class="mx-auto" id="table">
-                </table>
-                <div id="cover"></div>
-            </div>    
+            <div id="layout">
+                <div id="nexttop" class='justify-content-center align-items-center flex-column'>    
+                </div>    
+                <div class="position-relative justify-content-center align-items-center" id="tablewrap">
+                    <table cellspacing="0px" id="table">
+                    </table>
+                    <div id="cover"></div>
+                </div>   
+            </div> 
         </div>
          
     <script src='index.js'></script>

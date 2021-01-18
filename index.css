@@ -5,7 +5,7 @@
     100% {opacity: 0;}
   }
 
-table {
+table { 
     position: relative;
     overflow: hidden;
 }
@@ -15,12 +15,17 @@ td {
 }
 
 #main {
-    padding: 0 5px !important;
-    overflow: hidden;
+    padding: 0 10px !important;
+    min-width: 280px;
+    min-height: 280px;
+    max-width: 1920px;
+    max-height: 1920px;
 }
-#nexttop {
-    display: none;
+
+#nexttop,#tablewrap {
+    display: flex;
 }
+
 #nexttop .btn-lg {
     padding: 5px 15px;
 }
@@ -40,46 +45,70 @@ td {
     left:0;
     background-color: transparent;
 }
-#picture {
+#xchoice {
+    height: 10%;
+}
+#content {
+    height: 90%;
     display: flex;
 }
+#layout {
+    height: 100%;
+    display: none;
+}
+#top{
+    min-height: 60px;
+}
+#nexttop {
+    min-height: 180px;
+}
+#picture,#tablewrap {
+    display: flex;
+}
+#tablewrap {
+    padding: 15px 0;
+}
+#picture>div {
+   height: 88%;
+}
 #picture>div>div {
-    top:0;
     left:0;
+    display: none;
 }
 #img1 {
-    background-size: 100% 100%;
-    overflow: hidden;
+    width: 0px;
+    height:0px;
 }
-#img1 button {
+#picture>div>div button {
     background-color: rgba(255,255,255,0.5);
     color: black;
 }
-#img1 button:hover {
+#picture>div>div button:hover {
     background-color: rgba(255,255,255,1);
 }
-#img1 label {
+#picture>div>div label {
     background-color: rgba(0,0,0,0.5);
     color: white;
 }
-#img1 label:hover {
+#picture>div>div label:hover {
     background-color: rgba(0,0,0,1);
 }
 
-#xchoice,#selectimage,#selectsize,#top,#nexttop {
-        margin-top: 0.25rem !important;
+#selectimage,#selectsize,#nexttop {
+        padding-top: 0.25rem !important;
+        padding-bottom: 0.25rem !important;
 }
 
 @media screen and (min-width: 480px) and (min-height: 480px) {
-    #xchoice,#selectimage,#selectsize,#top,#nexttop {
-        margin-top: 0.5rem !important;
-        margin-bottom: 0.5rem !important;
+    #selectimage,#selectsize,#nexttop {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
     }
 }
 @media screen and (min-height: 568px) {
-    #xchoice,#selectimage,#selectsize,#top,#nexttop {
-        margin-top: 1rem !important;
-        margin-bottom: 1rem !important;
+    #selectimage,#selectsize,#nexttop {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
     }
 }
 
@@ -99,14 +128,16 @@ td {
         padding: 3px 10px;
     }
 }
-@media screen and (max-width: 576px) {
-    #nexttop {
-        flex-wrap: wrap;
+@media screen and (max-height: 360px) {
+    #selectimage,#selectsize {
+        font-size: 1rem !important;
     }
-    .time {
-        width: 100%;
+    #xchoice {
+        font-size: 1.2rem !important;
     }
+    
 }
+
 @media screen and (max-width: 480px) {
     #selectimage,#selectsize {
         font-size: 1.2rem !important;
